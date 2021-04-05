@@ -151,6 +151,7 @@
     <ClCompile Include="SoftBody.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Spring.cpp" />
+    <ClCompile Include="TestSpring.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ambient.h" />
@@ -158,6 +159,7 @@
     <ClInclude Include="DrawAgent.h" />
     <ClInclude Include="SoftBody.h" />
     <ClInclude Include="Spring.h" />
+    <ClInclude Include="TestSpring.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

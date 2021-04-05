@@ -1,38 +1,54 @@
 #include "Spring.h"
 
-void Spring::setPoints(sf::Vector2f puntoA, sf::Vector2f puntoB)
+void Spring::initState(float grav, float mass, float vel, float k, float timeStep, float alpha)
 {
-	_Puntos[0] = puntoA; _Puntos[1] = puntoB;
+	_Grav = grav;
+	_Mass = mass;
+	_Vel = vel;
+	_K = k;
+	_TimeStep = timeStep;
+	_Alpha = alpha;
 }
 
-sf::Vector2f Spring::getSpringForce()
+void Spring::setCenter(sf::Vector2f puntoA)
 {
-	return _SpringForce;
+	_PuntoA = puntoA;
 }
 
-void Spring::calcSpForce()
+void Spring::setExtPoint(sf::Vector2f puntoB)
 {
-	_SpringForce = (-_K) * (_Puntos[0]-_Puntos[1]);
+	_PuntoB = puntoB;
 }
 
-void Spring::calcDamp()
+void Spring::setMass(float mass)
 {
-	_DampForce = _Damping * _VelY;
+	_Mass = mass;
 }
 
-void Spring::calcForceXY()
+void Spring::setGrav(float grav)
 {
-	_ForceXY = _SpringForce + (_Mass * _Grav) - _DampForce;
+	_Grav = grav;
 }
 
-void Spring::setMG(float mass, sf::Vector2f grav)
+void Spring::updatePhysics()
 {
-	_Mass = mass; _Grav = grav;
+	_Hypo = hypot(fabs(_PuntoA.x - _PuntoB.x), fabs(_PuntoA.y - _PuntoB.y));
+	_SpringForce = -_K * _Hypo;
+	_DampForce = _Damping * _Vel;
+	_Force = _SpringForce + (_Mass * cos(_Alpha)) - _DampForce;
+	_Accel = _Force / _Mass;
+	_Vel += _Accel * _TimeStep;
+	_Hypo += _Vel * _TimeStep;
+
+	//calculo de las nuevas coord
+	float x = sin(_Alpha) * _Hypo;
+	float y = cos(_Alpha) * _Hypo;
+	_PuntoB = { x,y };
+
+
 }
 
-void Spring::update()
+sf::Vector2f Spring::getPoint()
 {
-	calcDamp();
-	calcSpForce();
-	calcForceXY();
+	return _PuntoB;
 }

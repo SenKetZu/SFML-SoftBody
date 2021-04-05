@@ -7,6 +7,13 @@ void Ambient::Loop()
 	while (DrawAgent::getInstance().IsOpen())
 	{
 		DrawAgent::getInstance().HandleEvents();
+		//_Body.BodyUpdate();
+
+		DrawAgent::getInstance().Clear();
+
+
+
+
 
 
 		DrawAgent::getInstance().Draw(_Body.getBody());

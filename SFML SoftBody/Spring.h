@@ -4,26 +4,43 @@
 class Spring
 {
 private:
+	//State
+	float _Grav = 0.0f,
+		  _Mass = 0.0f,
+		  _Vel = 0.0f,
+		  _K = 0.0f,
+		  _Damping = 0.0f,
+		  _TimeStep = 0.0f,
+		  _Alpha = 0.0f;
 
-	sf::Vector2f _Puntos[2];
+	//PuntoA = centro, PuntoB el borde
+	sf::Vector2f _PuntoA, _PuntoB;
 
+	//internal Values
+	float _SpringForce,
+		  _Force,
+		  _DampForce,
+		  _Accel,
+		  _Hypo;
 
-	sf::Vector2f _Damping{1,1};
-	sf::Vector2f _DampForce;
-	sf::Vector2f _SpringForce;
-	sf::Vector2f _ForceXY;
-	sf::Vector2f _Grav{1,1};
-	//K es la constante de hook
-	float _K = 1;
-	float _VelY=1;
-	float _Mass=1;
+	
+	
+
 public:
-	void setPoints(sf::Vector2f puntoA, sf::Vector2f puntoB);
-	void setMG(float mass, sf::Vector2f grav);
-	sf::Vector2f getSpringForce();
-	void calcSpForce();
-	void calcDamp();
-	void calcForceXY();
-	void update();
+
+	//entradas
+	void initState(float grav, float mass, float vel, float k,float timeStep, float alpha);
+	void setCenter(sf::Vector2f puntoA);
+	void setExtPoint(sf::Vector2f puntoB);
+	void setMass(float mass);
+	void setGrav(float grav);
+
+
+
+	//update
+	void updatePhysics();
+
+	//salidas
+	sf::Vector2f getPoint();
 };
 

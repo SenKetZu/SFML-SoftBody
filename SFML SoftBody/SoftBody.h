@@ -4,17 +4,19 @@
 class SoftBody
 {
 private:
-	sf::Vector2f _centralPoint = {200,200};
+	sf::Vector2f _centralPoint = {400,300};
 	std::vector<sf::Vector2f> _Bordes;
 	std::vector<Spring> _Resortes;
-	//float _RadioInicial = 1;
+	
 	sf::ConvexShape _Body;
 	float _Expancion = 100;
+	int _Mass=10;
 
 
 	
 public:
 	SoftBody();
+	void initBody();
 	void setDefinition(int cant = 50);
 	void BodyUpdate();
 	sf::Drawable& getBody();
