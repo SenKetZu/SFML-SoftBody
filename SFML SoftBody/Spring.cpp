@@ -1,10 +1,10 @@
 #include "Spring.h"
-
-void Spring::initState(float grav, float mass, float vel, float k, float timeStep, float alpha)
+//k from Hook Law's
+void Spring::initState(float grav, float mass, float initvel, float k, float timeStep, float alpha)
 {
 	_Grav = grav;
 	_Mass = mass;
-	_Vel = vel;
+	_Vel = initvel;
 	_K = k;
 	_TimeStep = timeStep;
 	_Alpha = alpha;
@@ -30,9 +30,10 @@ void Spring::setGrav(float grav)
 	_Grav = grav;
 }
 
-void Spring::updatePhysics()
+void Spring::updatePhysics(float delta)
 {
-	_Hypo = hypot(fabs(_PuntoA.x - _PuntoB.x), fabs(_PuntoA.y - _PuntoB.y));
+	_TimeStep = delta;
+	_Hypo = hypot((_PuntoB.x- _PuntoA.x), (_PuntoB.y- _PuntoA.y));
 	_SpringForce = -_K * _Hypo;
 	_DampForce = _Damping * _Vel;
 	_Force = _SpringForce + (_Mass * cos(_Alpha)) - _DampForce;

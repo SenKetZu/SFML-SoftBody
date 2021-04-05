@@ -5,12 +5,13 @@
 class Ambient
 {
 private:
-	float _Gravity;
-	float _TimeStep;
-	DeltaT _Dtime;
+
+	float _Gravity=0.0f;	
 	SoftBody _Body;
+
 public:
 
+	void setGrav(float grav);
 	void Loop();
  
 };

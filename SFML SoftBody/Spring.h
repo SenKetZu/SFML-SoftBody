@@ -9,7 +9,7 @@ private:
 		  _Mass = 0.0f,
 		  _Vel = 0.0f,
 		  _K = 0.0f,
-		  _Damping = 0.0f,
+		  _Damping = 1.0f,
 		  _TimeStep = 0.0f,
 		  _Alpha = 0.0f;
 
@@ -17,11 +17,11 @@ private:
 	sf::Vector2f _PuntoA, _PuntoB;
 
 	//internal Values
-	float _SpringForce,
-		  _Force,
-		  _DampForce,
-		  _Accel,
-		  _Hypo;
+	float _SpringForce=0.0f,
+		  _Force = 0.0f,
+		  _DampForce = 0.0f,
+		  _Accel = 0.0f,
+		  _Hypo = 0.0f;
 
 	
 	
@@ -38,7 +38,7 @@ public:
 
 
 	//update
-	void updatePhysics();
+	void updatePhysics(float delta);
 
 	//salidas
 	sf::Vector2f getPoint();

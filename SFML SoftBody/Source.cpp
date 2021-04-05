@@ -9,22 +9,6 @@ int main() {
 	Ambient obj;
 	obj.Loop();
 	
-/*
-	TestSpring obj;
-	while (true)
-	{
-		DrawAgent::getInstance().HandleEvents();
-		obj.update();
-
-		obj.draw();
-		DrawAgent::getInstance().Display();
-	}
-	*/
-
-
-
-
-
 
 	return 0;
 }

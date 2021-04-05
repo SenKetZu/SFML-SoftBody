@@ -33,6 +33,19 @@ sf::RenderWindow& DrawAgent::getWindow()
 	return _Screen;
 }
 
+float DrawAgent::getDelta(bool reset)
+{
+	float del=0.0f;
+	if (reset) {
+		del= _DeltaTime.getDelta();
+	}
+	else
+	{
+		del= _DeltaTime.getDelta();
+	}
+	return del;
+}
+
 void DrawAgent::Display()
 {
 	_Screen.display();

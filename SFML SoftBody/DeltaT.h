@@ -7,6 +7,5 @@ private:
 	sf::Clock _Delta;
 public:
 	float getDelta();
-	float calcDelta();
 };
 
