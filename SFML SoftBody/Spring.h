@@ -9,7 +9,7 @@ private:
 		  _Mass = 0.0f,
 		  _Vel = 0.0f,
 		  _K = 0.0f,
-		  _Damping = 1.0f,
+		  _Damping = 10.0f,
 		  _TimeStep = 0.0f,
 		  _Alpha = 0.0f;
 
@@ -29,7 +29,7 @@ private:
 public:
 
 	//entradas
-	void initState(float grav, float mass, float vel, float k,float timeStep, float alpha);
+	void initState(float grav, float mass, float vel, float k, float alpha);
 	void setCenter(sf::Vector2f puntoA);
 	void setExtPoint(sf::Vector2f puntoB);
 	void setMass(float mass);

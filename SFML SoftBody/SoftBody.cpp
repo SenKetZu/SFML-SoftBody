@@ -12,6 +12,14 @@ void SoftBody::initBody(sf::Vector2f central, int definition, sf::Color color)
     
 }
 
+void SoftBody::move(sf::Vector2f move)
+{
+    _centralPoint = move;
+    //DefineBorder();
+    moveBorder();
+    BodyUpdate();
+}
+
 void SoftBody::changeDefinition(int def)
 {
     _Definition = def;
@@ -25,6 +33,14 @@ void SoftBody::changeMass(float mass)
 void SoftBody::changeExpancion(float expan)
 {
     _Expancion = expan;
+}
+
+void SoftBody::moveBorder()
+{
+    for (Spring& resorte: _Resortes)
+    {
+        resorte.setCenter(_centralPoint);
+    }
 }
 
 void SoftBody::DefineBorder()
@@ -65,14 +81,16 @@ void SoftBody::DefineBorder()
     
 }
 
+
+
 void SoftBody::defineSprings()
 {
     _Resortes.clear();
-    float delta = DrawAgent::getInstance().getDelta();
+    float delta = DrawAgent::getInstance().getDelta(true);
     for (sf::Vector3f& borde : _Bordes)
     {
         Spring auxSpring;
-        auxSpring.initState(_Grav, _Mass, _InitialVel, _HookLawK, delta*_DeltaMultipli, borde.z);
+        auxSpring.initState(_Grav, _Mass, _InitialVel, _HookLawK, borde.z);
         auxSpring.setCenter(_centralPoint);
         auxSpring.setExtPoint({ borde.x, borde.y });
 
@@ -84,11 +102,11 @@ void SoftBody::defineSprings()
 
 void SoftBody::BodyUpdate()
 {
-    float delta = DrawAgent::getInstance().getDelta();
+    float delta = DrawAgent::getInstance().getDelta(true);
     for (int i = 0; i < _Resortes.size(); ++i) {
         
         _Body.setPoint(i, _Resortes[i].getPoint());
-        _Resortes[i].updatePhysics(delta*_DeltaMultipli);
+        _Resortes[i].updatePhysics(_DeltaMultipli*delta);
     }
 }
 

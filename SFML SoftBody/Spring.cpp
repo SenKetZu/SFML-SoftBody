@@ -1,12 +1,14 @@
 #include "Spring.h"
-//k from Hook Law's
-void Spring::initState(float grav, float mass, float initvel, float k, float timeStep, float alpha)
+#include "DrawAgent.h"
+
+ //k from Hook Law's
+void Spring::initState(float grav, float mass, float initvel, float k, float alpha)
 {
 	_Grav = grav;
 	_Mass = mass;
 	_Vel = initvel;
 	_K = k;
-	_TimeStep = timeStep;
+	
 	_Alpha = alpha;
 }
 
@@ -36,15 +38,16 @@ void Spring::updatePhysics(float delta)
 	_Hypo = hypot((_PuntoB.x- _PuntoA.x), (_PuntoB.y- _PuntoA.y));
 	_SpringForce = -_K * _Hypo;
 	_DampForce = _Damping * _Vel;
-	_Force = _SpringForce + (_Mass * cos(_Alpha)) - _DampForce;
+	_Force = _SpringForce + _Mass * _Grav - _DampForce;
 	_Accel = _Force / _Mass;
 	_Vel += _Accel * _TimeStep;
 	_Hypo += _Vel * _TimeStep;
 
 	//calculo de las nuevas coord
-	float x = sin(_Alpha) * _Hypo;
-	float y = cos(_Alpha) * _Hypo;
+	float x = sin(_Alpha * 3.14159265 / 180.0f) * _Hypo;
+	float y = cos(_Alpha * 3.14159265 / 180.0f) * _Hypo;
 	_PuntoB = { x,y };
+	_PuntoB += _PuntoA;
 
 
 }
