@@ -61,4 +61,7 @@ void DrawAgent::Close()
 	_Screen.close();
 }
 
-
+float toRad(float deg)
+{
+		return (deg * 3.14159265) / 180.0f;
+}

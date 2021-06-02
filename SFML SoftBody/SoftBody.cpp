@@ -9,15 +9,23 @@ void SoftBody::initBody(sf::Vector2f central, int definition, sf::Color color)
     _Definition = definition;
     _Body.setFillColor(color);
     DefineBorder();
+    _ToMouse.setCenter(central);
+    _ToMouse.setExtPoint(central);
     
 }
 
 void SoftBody::move(sf::Vector2f move)
 {
-    _centralPoint = move;
+    _Estado = isMoving;
+   _ToMouse.setCenter(move);
+   
+    //moveBorder();
+    
+    
+    
     //DefineBorder();
-    moveBorder();
-    BodyUpdate();
+    
+    
 }
 
 void SoftBody::changeDefinition(int def)
@@ -35,7 +43,7 @@ void SoftBody::changeExpancion(float expan)
     _Expancion = expan;
 }
 
-void SoftBody::moveBorder()
+void SoftBody::moveCenter()
 {
     for (Spring& resorte: _Resortes)
     {
@@ -58,9 +66,9 @@ void SoftBody::DefineBorder()
 
         std::cout << "Punto " << i <<":"<< std::endl;
 
-        aux.x = sin(Betha * 3.14159265 / 180.0f) * _Expancion;
+        aux.x = sin(toRad(Betha)) * _Expancion;
         
-        aux.y = cos(Betha * 3.14159265 / 180.0f) * _Expancion;
+        aux.y = cos(toRad(Betha)) * _Expancion;
         
         aux.z = Betha;
         //aux2.setPoints( _centralPoint, aux);
@@ -85,8 +93,14 @@ void SoftBody::DefineBorder()
 
 void SoftBody::defineSprings()
 {
+    _ToMouse.initState(0, _Mass, _InitialVel, _HookLawK);
+    _ToMouse.setDamp(1);
+    _ToMouse.setCenter(_centralPoint);
+    _ToMouse.setExtPoint(_centralPoint);
+
     _Resortes.clear();
     float delta = DrawAgent::getInstance().getDelta(true);
+
     for (sf::Vector3f& borde : _Bordes)
     {
         Spring auxSpring;
@@ -98,6 +112,7 @@ void SoftBody::defineSprings()
         _Resortes.push_back(auxSpring);
 
     }
+
 }
 
 void SoftBody::BodyUpdate()
@@ -108,6 +123,24 @@ void SoftBody::BodyUpdate()
         _Body.setPoint(i, _Resortes[i].getPoint());
         _Resortes[i].updatePhysics(_DeltaMultipli*delta);
     }
+    if (_Estado== isMoving)
+    {
+        _ToMouse.updatePhysics(_DeltaMultipli * delta);
+        moveCenter();
+        _centralPoint = _ToMouse.getPoint();
+    }
+    
+    
+}
+
+void SoftBody::stopMove()
+{
+    _Estado = isStatic;
+}
+
+sf::Vector2f SoftBody::getCenter()
+{
+    return _centralPoint;
 }
 
 sf::Drawable& SoftBody::getBody()

@@ -11,6 +11,9 @@ private:
 
 public:
 
+
+
+
 	void setGrav(float grav);
 	void Loop();
  

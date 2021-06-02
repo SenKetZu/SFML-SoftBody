@@ -1,5 +1,5 @@
 #include "DeltaT.h"
-#include <SFML/Graphics.hpp>
+
 
 float DeltaT::getDelta()
 {

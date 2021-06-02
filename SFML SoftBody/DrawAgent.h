@@ -2,6 +2,12 @@
 #include <SFML/Graphics.hpp>
 #include "DeltaT.h"
 
+
+float toRad(float deg);
+
+
+
+
 class DrawAgent
 {
 private:

@@ -32,6 +32,11 @@ void Spring::setGrav(float grav)
 	_Grav = grav;
 }
 
+void Spring::setDamp(float damp)
+{
+	_Damping = damp;
+}
+
 void Spring::updatePhysics(float delta)
 {
 	_TimeStep = delta;
@@ -44,8 +49,8 @@ void Spring::updatePhysics(float delta)
 	_Hypo += _Vel * _TimeStep;
 
 	//calculo de las nuevas coord
-	float x = sin(_Alpha * 3.14159265 / 180.0f) * _Hypo;
-	float y = cos(_Alpha * 3.14159265 / 180.0f) * _Hypo;
+	float x = sin(toRad(_Alpha)) * _Hypo;
+	float y = cos(toRad(_Alpha)) * _Hypo;
 	_PuntoB = { x,y };
 	_PuntoB += _PuntoA;
 

@@ -4,8 +4,10 @@
 class Spring
 {
 private:
+
+protected:
 	//State
-	float _Grav = 0.0f,
+	 float _Grav = 0.0f,
 		  _Mass = 0.0f,
 		  _Vel = 0.0f,
 		  _K = 0.0f,
@@ -34,11 +36,12 @@ public:
 	void setExtPoint(sf::Vector2f puntoB);
 	void setMass(float mass);
 	void setGrav(float grav);
+	void setDamp(float damp);
 
 
 
 	//update
-	void updatePhysics(float delta);
+	virtual void updatePhysics(float delta);
 
 	//salidas
 	sf::Vector2f getPoint();
