@@ -146,8 +146,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ambient.cpp" />
+    <ClCompile Include="Angle.cpp" />
     <ClCompile Include="DeltaT.cpp" />
     <ClCompile Include="DrawAgent.cpp" />
+    <ClCompile Include="Force.cpp" />
     <ClCompile Include="SoftBody.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Spring.cpp" />
@@ -156,8 +158,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ambient.h" />
+    <ClInclude Include="Angle.h" />
     <ClInclude Include="DeltaT.h" />
     <ClInclude Include="DrawAgent.h" />
+    <ClInclude Include="Force.h" />
     <ClInclude Include="SoftBody.h" />
     <ClInclude Include="Spring.h" />
     <ClInclude Include="Spring2D.h" />
