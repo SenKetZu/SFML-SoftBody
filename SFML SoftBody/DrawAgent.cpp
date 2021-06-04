@@ -1,6 +1,8 @@
 #include "DrawAgent.h"
 #include <SFML/Graphics.hpp>
 
+
+
 DrawAgent::DrawAgent():_Screen(sf::VideoMode(800,600),"SoftBody",sf::Style::Default)
 {
 	_Screen.setFramerateLimit(60);
@@ -13,8 +15,6 @@ bool DrawAgent::IsOpen()
 
 void DrawAgent::HandleEvents()
 {
-
-
 	while (_Screen.pollEvent(_Captura))
 	{
 		if (_Captura.type == sf::Event::Closed) {
@@ -28,26 +28,24 @@ void DrawAgent::Draw(const sf::Drawable& obj)
 	_Screen.draw(obj);
 }
 
-sf::RenderWindow& DrawAgent::getWindow()
+void DrawAgent::Draw(SoftBody& body)
 {
-	return _Screen;
+	_Screen.draw(body.draw());
 }
 
-float DrawAgent::getDelta(bool reset)
+sf::Vector2f DrawAgent::getMousePos()
 {
-	float del=0.0f;
-	if (reset) {
-		del= _DeltaTime.getDelta();
-	}
-	else
-	{
-		del= _DeltaTime.getDelta();
-	}
-	return del;
+	return sf::Vector2f(sf::Mouse::getPosition(_Screen));
+}
+
+float DrawAgent::getDelta()
+{
+	return _DeltaTime.getDelta();
 }
 
 void DrawAgent::Display()
 {
+	_DeltaTime.calcDelta();
 	_Screen.display();
 }
 

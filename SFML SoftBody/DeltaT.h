@@ -3,9 +3,10 @@
 class DeltaT
 {
 private:
-	float _Dtime;
+	float _Dtime=0.0f;
 	sf::Clock _Delta;
 public:
-	float getDelta();
+	float	getDelta();
+	void	calcDelta();
 };
 

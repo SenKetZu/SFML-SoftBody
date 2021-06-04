@@ -3,6 +3,11 @@
 
 float DeltaT::getDelta()
 {
-	_Dtime = _Delta.restart().asSeconds();
+	
 	return _Dtime;
+}
+
+void DeltaT::calcDelta()
+{
+	_Dtime = _Delta.restart().asSeconds();
 }

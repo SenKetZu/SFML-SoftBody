@@ -57,8 +57,8 @@ private:
 
         if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
-            positionX= sf::Mouse::getPosition(DrawAgent::getInstance().getWindow()).x;
-            positionY= sf::Mouse::getPosition(DrawAgent::getInstance().getWindow()).y;
+           // positionX= sf::Mouse::getPosition(DrawAgent::getInstance().getWindow()).x;
+           // positionY= sf::Mouse::getPosition(DrawAgent::getInstance().getWindow()).y;
         }
 
         //rect(anchorX - 5, anchorY - 5, 10, 10);
@@ -67,7 +67,7 @@ private:
 
         //line(positionX, positionY, anchorX, anchorY);
         DrawAgent::getInstance().Draw(circle);
-        DrawAgent::getInstance().getWindow().draw(line, 2, sf::Lines);
+       // DrawAgent::getInstance().getWindow().draw(line, 2, sf::Lines);
         //ellipse(positionX, positionY, 20, 20);
 
     };

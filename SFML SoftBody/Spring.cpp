@@ -1,63 +1,32 @@
 #include "Spring.h"
 #include "DrawAgent.h"
 
- //k from Hook Law's
-void Spring::initState(float grav, float mass, float initvel, float k, float alpha)
+Spring::Spring(MassPoint& pointa, MassPoint& pointb):_PointA(pointa),_PointB(pointb),_Spring(pointa<<=pointb){}
+
+Spring::Spring(MassPoint& pointa, MassPoint& pointb, float rest):_PointA(pointa), _PointB(pointb), _Spring(pointa <<= pointb)
 {
-	_Grav = grav;
-	_Mass = mass;
-	_Vel = initvel;
-	_K = k;
-	
-	_Alpha = alpha;
+	_RestLength = rest;
 }
 
-void Spring::setCenter(sf::Vector2f puntoA)
+void Spring::setRestL(float restl)
 {
-	_PuntoA = puntoA;
+	_RestLength = restl;
 }
 
-void Spring::setExtPoint(sf::Vector2f puntoB)
+void Spring::physicsUpdate()
 {
-	_PuntoB = puntoB;
+	_TimeSp = DrawAgent::getInstance().getDelta();
+
+	_SpringForce = -_K * (_RestLength - _Spring.getMagnitude());
+	_DampForce = _Damping * _Velocity;
+	_Force = _SpringForce +(1.0f*_PointA.getMass())- _DampForce;
+	_Acceleration = _Force / _PointA.getMass();
+	_Velocity = _Acceleration * _TimeSp;
+
+	_Spring.setMagnitude(_Velocity * _TimeSp);
+
+	_PointA.push(_Spring);
+	//_PointB.push(_Spring.oposite() / 2);
 }
 
-void Spring::setMass(float mass)
-{
-	_Mass = mass;
-}
 
-void Spring::setGrav(float grav)
-{
-	_Grav = grav;
-}
-
-void Spring::setDamp(float damp)
-{
-	_Damping = damp;
-}
-
-void Spring::updatePhysics(float delta)
-{
-	_TimeStep = delta;
-	_Hypo = hypot((_PuntoB.x- _PuntoA.x), (_PuntoB.y- _PuntoA.y));
-	_SpringForce = -_K * _Hypo;
-	_DampForce = _Damping * _Vel;
-	_Force = _SpringForce + _Mass * _Grav - _DampForce;
-	_Accel = _Force / _Mass;
-	_Vel += _Accel * _TimeStep;
-	_Hypo += _Vel * _TimeStep;
-
-	//calculo de las nuevas coord
-	float x = sin(toRad(_Alpha)) * _Hypo;
-	float y = cos(toRad(_Alpha)) * _Hypo;
-	_PuntoB = { x,y };
-	_PuntoB += _PuntoA;
-
-
-}
-
-sf::Vector2f Spring::getPoint()
-{
-	return _PuntoB;
-}

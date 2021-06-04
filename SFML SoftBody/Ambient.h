@@ -6,7 +6,6 @@ class Ambient
 {
 private:
 
-	float _Gravity=0.0f;	
 	SoftBody _Body;
 
 public:

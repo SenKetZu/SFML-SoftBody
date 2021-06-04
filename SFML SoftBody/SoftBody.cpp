@@ -1,151 +1,73 @@
 #include "SoftBody.h"
 #include <iostream>
-#include <math.h>
 #include "DrawAgent.h"
 
-void SoftBody::initBody(sf::Vector2f central, int definition, sf::Color color)
+
+
+SoftBody::SoftBody(sf::Vector2f pos):_CenterPoint(pos)
 {
-    _centralPoint = central;
-    _Definition = definition;
-    _Body.setFillColor(color);
-    DefineBorder();
-    _ToMouse.setCenter(central);
-    _ToMouse.setExtPoint(central);
-    
 }
 
-void SoftBody::move(sf::Vector2f move)
+sf::ConvexShape& SoftBody::draw()
 {
-    _Estado = isMoving;
-   _ToMouse.setCenter(move);
-   
-    //moveBorder();
-    
-    
-    
-    //DefineBorder();
-    
-    
+	return _Body;
 }
 
-void SoftBody::changeDefinition(int def)
+void SoftBody::init()
 {
-    _Definition = def;
-}
+	//reset vectors
+	_BorderPoints.clear();
+	_Springs.clear();
 
-void SoftBody::changeMass(float mass)
-{
-    _Mass = mass;
-}
+	//creacion de puntos
+	Angle betha('d', 0);
+	Angle Change('d', 360.0f / _BorderDefinition);
 
-void SoftBody::changeExpancion(float expan)
-{
-    _Expancion = expan;
-}
+	//uso betha
+	for (size_t i = 0; i < _BorderDefinition; i++)
+	{
+		MassPoint aux(MathVector(_initialLength, betha).getComponents() + _CenterPoint.getLocation());
+		_BorderPoints.push_back(aux);
+		betha += Change;
+	}
 
-void SoftBody::moveCenter()
-{
-    for (Spring& resorte: _Resortes)
-    {
-        resorte.setCenter(_centralPoint);
-    }
-}
+	//creacion de resortes;
+	for (MassPoint& e : _BorderPoints)
+	{
+		Spring aux(e, _CenterPoint);
+		_Springs.push_back(aux);
+	}
 
-void SoftBody::DefineBorder()
-{
-    _Bordes.clear();
-    _Body.setPointCount(_Definition);
-    
-    sf::Vector3f aux;
+	_Body.setFillColor(sf::Color::Black);
+	_Body.setOutlineColor(sf::Color::White);
+	_Body.setOutlineThickness(5);
 
-    float Alpha = 360.0f / _Definition;
-    double Betha = 0;
-
-    for (int i=0;i< _Definition;++i )
-    {
-
-        std::cout << "Punto " << i <<":"<< std::endl;
-
-        aux.x = sin(toRad(Betha)) * _Expancion;
-        
-        aux.y = cos(toRad(Betha)) * _Expancion;
-        
-        aux.z = Betha;
-        //aux2.setPoints( _centralPoint, aux);
-
-        aux.x +=_centralPoint.x;
-        std::cout << "X: " << aux.x << std::endl;
-
-        aux.y += _centralPoint.y;
-        std::cout << "Y: " << aux.y << std::endl << std::endl;
-
-    
-        _Bordes.push_back(aux);
-        Betha += Alpha;
-
-    }
-    defineSprings();
-    BodyUpdate();
-    
-}
-
-
-
-void SoftBody::defineSprings()
-{
-    _ToMouse.initState(0, _Mass, _InitialVel, _HookLawK);
-    _ToMouse.setDamp(1);
-    _ToMouse.setCenter(_centralPoint);
-    _ToMouse.setExtPoint(_centralPoint);
-
-    _Resortes.clear();
-    float delta = DrawAgent::getInstance().getDelta(true);
-
-    for (sf::Vector3f& borde : _Bordes)
-    {
-        Spring auxSpring;
-        auxSpring.initState(_Grav, _Mass, _InitialVel, _HookLawK, borde.z);
-        auxSpring.setCenter(_centralPoint);
-        auxSpring.setExtPoint({ borde.x, borde.y });
-
-
-        _Resortes.push_back(auxSpring);
-
-    }
 
 }
 
-void SoftBody::BodyUpdate()
+void SoftBody::update()
 {
-    float delta = DrawAgent::getInstance().getDelta(true);
-    for (int i = 0; i < _Resortes.size(); ++i) {
-        
-        _Body.setPoint(i, _Resortes[i].getPoint());
-        _Resortes[i].updatePhysics(_DeltaMultipli*delta);
-    }
-    if (_Estado== isMoving)
-    {
-        _ToMouse.updatePhysics(_DeltaMultipli * delta);
-        moveCenter();
-        _centralPoint = _ToMouse.getPoint();
-    }
-    
-    
+	init();
+	for (Spring& e : _Springs)
+	{
+		e.physicsUpdate();
+	}
+	buildShape();
+
+
 }
 
-void SoftBody::stopMove()
+void SoftBody::moveTo(sf::Vector2f coords)
 {
-    _Estado = isStatic;
+	_CenterPoint.setLocation(coords);
 }
 
-sf::Vector2f SoftBody::getCenter()
+void SoftBody::buildShape()
 {
-    return _centralPoint;
+	_Body.setPointCount(_BorderDefinition);
+	for (size_t i = 0; i < _BorderDefinition; i++)
+	{
+		_Body.setPoint(i, _BorderPoints[i].getLocation());
+	}
 }
-
-sf::Drawable& SoftBody::getBody()
-{
-    return _Body;
-}
-
 

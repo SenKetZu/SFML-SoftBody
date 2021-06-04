@@ -3,19 +3,23 @@
 
 void Spring2D::initState(float grav, float mass, float vel, float k)
 {
-	_Grav = grav;
+	/*
+		_Grav = grav;
 	_Mass = mass;
 	_VelX = vel;
 	_VelY = vel;
 	_K = k;
+	*/
+
 }
 
 void Spring2D::updatePhysics(float delta)
 {
+	/*
 	_TimeStep = delta;
 
-	_SpringForceX = -_K * (_PuntoB.x - _PuntoA.x);
-	_SpringForceY = -_K * (_PuntoB.y - _PuntoA.y);
+	_SpringForceX = -_K * (_PointB.x - _PointA.x);
+	_SpringForceY = -_K * (_PointB.y - _PointA.y);
 
 	_DampForceX = _Damping * _VelX;
     _DampForceY = _Damping * _VelY;
@@ -34,7 +38,8 @@ void Spring2D::updatePhysics(float delta)
 	//calculo de las nuevas coord
 	float x = _VelX * _TimeStep;
 	float y = _VelY * _TimeStep;
-	_PuntoB = { x,y };
-	_PuntoB += _PuntoA;
+	_PointB = { x,y };
+	_PointB += _PointA;
+	*/
 }
 

@@ -13,6 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{b2fb697e-4321-4886-868d-e79aea398763}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\headers">
+      <UniqueIdentifier>{f6293ca0-b0a9-4c73-a78d-3e461412c0a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\cpp">
+      <UniqueIdentifier>{a2af8134-60b1-4d44-b386-a96246922e35}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -24,25 +33,28 @@
     <ClCompile Include="Ambient.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Spring.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="DrawAgent.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="SoftBody.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="TestSpring.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Spring2D.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Force.cpp">
+    <ClCompile Include="MathVector.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Angle.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Spring2D.cpp">
+      <Filter>Objects\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Spring.cpp">
+      <Filter>Objects\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="SoftBody.cpp">
+      <Filter>Objects\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="MassPoint.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -53,25 +65,28 @@
     <ClInclude Include="Ambient.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Spring.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="DrawAgent.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="SoftBody.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="TestSpring.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Spring2D.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Force.h">
+    <ClInclude Include="MathVector.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Angle.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Spring.h">
+      <Filter>Objects\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Spring2D.h">
+      <Filter>Objects\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="SoftBody.h">
+      <Filter>Objects\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="MassPoint.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

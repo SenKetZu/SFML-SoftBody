@@ -1,35 +1,35 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "DeltaT.h"
+#include "SoftBody.h"
 
-
-float toRad(float deg);
 
 
 
 
 class DrawAgent
 {
-private:
-	sf::RenderWindow _Screen;
-	sf::Event _Captura;
-	DeltaT _DeltaTime;
-
-	DrawAgent();
 public:
-	static DrawAgent& getInstance()
+	static DrawAgent&	getInstance()
 	{
 		static DrawAgent instance;
 		return instance;
 	}
+	bool				IsOpen();
+	void				HandleEvents();
+	void				Draw(const sf::Drawable& obj);
+	void				Draw(SoftBody& body);
+	sf::Vector2f		getMousePos();
+	float				getDelta();
+	void				Display();
+	void				Clear();
+	void				Close();
 
-	bool IsOpen();
-	void HandleEvents();
-	void Draw(const sf::Drawable& obj);
-	sf::RenderWindow& getWindow();
-	float getDelta(bool reset=true);
-	void Display();
-	void Clear();
-	void Close();
+private:
+	sf::RenderWindow	_Screen;
+	sf::Event			_Captura;
+	DeltaT				_DeltaTime;
+						DrawAgent();
+
 };
 

@@ -1,49 +1,34 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <math.h>
+#include "MathVector.h"
+#include "MassPoint.h"
+
 class Spring
 {
-private:
-
-protected:
-	//State
-	 float _Grav = 0.0f,
-		  _Mass = 0.0f,
-		  _Vel = 0.0f,
-		  _K = 0.0f,
-		  _Damping = 10.0f,
-		  _TimeStep = 0.0f,
-		  _Alpha = 0.0f;
-
-	//PuntoA = centro, PuntoB el borde
-	sf::Vector2f _PuntoA, _PuntoB;
-
-	//internal Values
-	float _SpringForce=0.0f,
-		  _Force = 0.0f,
-		  _DampForce = 0.0f,
-		  _Accel = 0.0f,
-		  _Hypo = 0.0f;
-
-	
-	
-
 public:
+	Spring(MassPoint& pointa, MassPoint& pointb);
+	Spring(MassPoint& pointa, MassPoint& pointb, float rest);
 
-	//entradas
-	void initState(float grav, float mass, float vel, float k, float alpha);
-	void setCenter(sf::Vector2f puntoA);
-	void setExtPoint(sf::Vector2f puntoB);
-	void setMass(float mass);
-	void setGrav(float grav);
-	void setDamp(float damp);
+	void		setRestL(float restl);
+	void		physicsUpdate();
 
+private:
+	//variables resorte
+	MassPoint& _PointA;
+	MassPoint& _PointB;
+	MathVector	_Spring;
 
+	float		_RestLength = 0.0f,
+				_Damping= 10.0f, 
+				_K=1.0f,
+				_TimeSp=1.0f;
 
-	//update
-	virtual void updatePhysics(float delta);
-
-	//salidas
-	sf::Vector2f getPoint();
+	//variables de transición
+	float		_SpringForce = 0.0f,
+				_DampForce = 0.0f,
+				_Velocity = 0.0f,
+				_Force=0,
+				_Acceleration=0;
 };
 

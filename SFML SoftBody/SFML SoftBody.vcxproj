@@ -149,7 +149,8 @@
     <ClCompile Include="Angle.cpp" />
     <ClCompile Include="DeltaT.cpp" />
     <ClCompile Include="DrawAgent.cpp" />
-    <ClCompile Include="Force.cpp" />
+    <ClCompile Include="MassPoint.cpp" />
+    <ClCompile Include="MathVector.cpp" />
     <ClCompile Include="SoftBody.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Spring.cpp" />
@@ -161,7 +162,8 @@
     <ClInclude Include="Angle.h" />
     <ClInclude Include="DeltaT.h" />
     <ClInclude Include="DrawAgent.h" />
-    <ClInclude Include="Force.h" />
+    <ClInclude Include="MassPoint.h" />
+    <ClInclude Include="MathVector.h" />
     <ClInclude Include="SoftBody.h" />
     <ClInclude Include="Spring.h" />
     <ClInclude Include="Spring2D.h" />
