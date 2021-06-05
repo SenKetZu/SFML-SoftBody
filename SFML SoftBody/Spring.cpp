@@ -15,17 +15,17 @@ void Spring::setRestL(float restl)
 
 void Spring::physicsUpdate()
 {
-	_TimeSp = DrawAgent::getInstance().getDelta();
+	_TimeSp = DrawAgent::getInstance().getDelta()*7;
 
 	_SpringForce = -_K * (_RestLength - _Spring.getMagnitude());
 	_DampForce = _Damping * _Velocity;
-	_Force = _SpringForce +(1.0f*_PointA.getMass())- _DampForce;
+	_Force = _SpringForce - _DampForce;
 	_Acceleration = _Force / _PointA.getMass();
 	_Velocity = _Acceleration * _TimeSp;
 
 	_Spring.setMagnitude(_Velocity * _TimeSp);
 
-	_PointA.push(_Spring);
+	_PointA.push(_Spring/2);
 	//_PointB.push(_Spring.oposite() / 2);
 }
 

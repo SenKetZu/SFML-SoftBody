@@ -21,7 +21,7 @@ private:
 
 	float		_RestLength = 0.0f,
 				_Damping= 10.0f, 
-				_K=1.0f,
+				_K=10.0f,
 				_TimeSp=1.0f;
 
 	//variables de transición

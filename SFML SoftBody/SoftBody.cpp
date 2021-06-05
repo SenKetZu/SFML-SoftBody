@@ -26,7 +26,7 @@ void SoftBody::init()
 	//uso betha
 	for (size_t i = 0; i < _BorderDefinition; i++)
 	{
-		MassPoint aux(MathVector(_initialLength, betha).getComponents() + _CenterPoint.getLocation());
+		MassPoint aux((MathVector(_initialLength, betha).getComponents()) + _CenterPoint.getLocation());
 		_BorderPoints.push_back(aux);
 		betha += Change;
 	}
@@ -42,19 +42,20 @@ void SoftBody::init()
 	_Body.setOutlineColor(sf::Color::White);
 	_Body.setOutlineThickness(5);
 
-
+	
 }
 
 void SoftBody::update()
 {
-	init();
+
 	for (Spring& e : _Springs)
 	{
 		e.physicsUpdate();
+
 	}
 	buildShape();
 
-
+	
 }
 
 void SoftBody::moveTo(sf::Vector2f coords)

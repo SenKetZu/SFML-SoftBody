@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Spring.h"
+#include <iostream>
 #include"MassPoint.h"
 class SoftBody
 {
@@ -12,11 +13,10 @@ public:
 	void					init();
 	void					update();
 	void					moveTo(sf::Vector2f coords);
+
 private:
-
 	void					buildShape();
-
-	Angle					_Alpha;
+	
 
 	std::vector<Spring>		_Springs;
 	std::vector<MassPoint>	_BorderPoints;
@@ -26,6 +26,7 @@ private:
 
 
 
-	size_t					_BorderDefinition = 5;
+	size_t					_BorderDefinition = 50
+		;
 };
 
