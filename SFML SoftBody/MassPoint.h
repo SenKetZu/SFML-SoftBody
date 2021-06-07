@@ -12,7 +12,7 @@ public:
 	void			setMass(float mass);
 	void			push(MathVector direction);
 
-	void			operator =(MassPoint& mp);//operador de asignacion estandar.	
+	void			operator =(MassPoint* mp);//operador de asignacion estandar.	
 	MathVector		operator <<=(MassPoint& mp);//esto te da el vector entre 2 MassPoints.
 
 private:

@@ -14,11 +14,11 @@ public:
 	void  setDeg(float deg);
 	void  setRad(float rad);
 
-	void operator =(Angle& Betha);
-	Angle operator +(Angle& Betha);
-	Angle operator -(Angle& Betha);
-	void operator +=(Angle& Betha);
-	void operator -=(Angle& Betha);
+	void operator =(Angle* Betha);
+	Angle operator +(Angle Betha);
+	Angle operator -(Angle Betha);
+	void operator +=(Angle Betha);
+	void operator -=(Angle Betha);
 	Angle operator *(float num);
 	Angle operator /(float num);
 	void operator *=(float num);

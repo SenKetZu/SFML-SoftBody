@@ -11,7 +11,7 @@ MathVector::MathVector(sf::Vector2f F, sf::Vector2f I)
 {
 	sf::Vector2f aux = F - I;
 	_Magnitud = sqrt(pow(aux.x, 2) + pow(aux.y, 2));
-	_Angle.setRad(asin(aux.y / _Magnitud));
+	_Angle.setRad(atan(aux.y/aux.x));
 }
 MathVector::MathVector(float mod, Angle ang) :_Magnitud(mod), _Angle(ang) {}
 
@@ -59,33 +59,33 @@ MathVector		MathVector::oposite()
 }
 
 //operators
-void			MathVector::operator= (MathVector& fors)
+void			MathVector::operator= (MathVector* fors)
 {
-	*this = fors;
+	memcpy(this, fors, sizeof this);
 }
 
-MathVector		MathVector::operator+ (MathVector& fors)
+MathVector		MathVector::operator+ (MathVector fors)
 {
 	sf::Vector2f sum = this->getComponents() + fors.getComponents();
 	MathVector aux(sqrt((pow(sum.x, 2) + pow(sum.y, 2))), Angle('r', asin(sum.y / _Magnitud)));
 	return aux;
 }
 
-MathVector		MathVector::operator- (MathVector& fors)
+MathVector		MathVector::operator- (MathVector fors)
 {
 	sf::Vector2f res= this->getComponents() - fors.getComponents();
 	MathVector aux(sqrt((pow(res.x, 2) + pow(res.y, 2))), Angle('r', asin(res.y / _Magnitud)));
 	return aux;
 }
 
-void			MathVector::operator+=(MathVector& fors)
+void			MathVector::operator+=(MathVector fors)
 {
 	sf::Vector2f sum = this->getComponents() + fors.getComponents();	
 	_Magnitud = sqrt((pow(sum.x, 2) + pow(sum.y, 2)));
 	_Angle.setRad(asin(sum.y / _Magnitud));
 }
 
-void			MathVector::operator-=(MathVector& fors)
+void			MathVector::operator-=(MathVector fors)
 {
 	sf::Vector2f res= this->getComponents() - fors.getComponents();
 	_Magnitud = sqrt((pow(res.x, 2) + pow(res.y, 2)));

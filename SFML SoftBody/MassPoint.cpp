@@ -28,9 +28,9 @@ void MassPoint::push(MathVector direction)
 	_Location += direction.getComponents();
 }
 
-void			MassPoint::operator  =	(MassPoint& mp)
+void MassPoint::operator  =	(MassPoint* mp)
 {
-	*this = mp;
+	memcpy(this, mp, sizeof this);
 }
 MathVector		MassPoint::operator <<=	(MassPoint& mp)
 {

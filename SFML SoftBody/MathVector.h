@@ -23,11 +23,11 @@ public:
 	MathVector		oposite();
 
 	//operators
-	void			operator = (MathVector& fors);
-	MathVector		operator + (MathVector& fors);
-	MathVector		operator - (MathVector& fors);
-	void			operator +=(MathVector& fors);
-	void			operator -=(MathVector& fors);
+	void			operator = (MathVector* fors);
+	MathVector		operator + (MathVector fors);
+	MathVector		operator - (MathVector fors);
+	void			operator +=(MathVector fors);
+	void			operator -=(MathVector fors);
 	MathVector		operator * (float num);
 	MathVector		operator / (float num);
 	void			operator *=(float num);

@@ -15,11 +15,11 @@ public:
 
 private:
 	//variables resorte
-	MassPoint& _PointA;
-	MassPoint& _PointB;
+	MassPoint& _BorderPoint;
+	MassPoint _AnchorPoint;
 	MathVector	_Spring;
 
-	float		_RestLength = 0.0f,
+	float		_RestLength = 10.0f,
 				_Damping= 10.0f, 
 				_K=10.0f,
 				_TimeSp=1.0f;

@@ -44,27 +44,27 @@ void Angle::setRad(float rad)
 }
 
 //Operators
-void Angle::operator=(Angle& Betha)
+void Angle::operator=(Angle* Betha)
 {
-	*this = Betha;
+	memcpy(this, Betha, sizeof this);
 }
 
-Angle Angle::operator+(Angle& Betha)
+Angle Angle::operator+(Angle Betha)
 {
 	return Angle('r', _Value + Betha.asRad());
 }
 
-Angle Angle::operator-(Angle& Betha)
+Angle Angle::operator-(Angle Betha)
 {
 	return Angle('r', _Value - Betha.asRad());
 }
 
-void Angle::operator+=(Angle& Betha)
+void Angle::operator+=(Angle Betha)
 {
 	_Value += Betha.asRad();
 }
 
-void Angle::operator-=(Angle& Betha)
+void Angle::operator-=(Angle Betha)
 {
 	_Value -= Betha.asRad();
 }
@@ -89,7 +89,7 @@ void Angle::operator/=(float num)
 	_Value /= num;
 }
 
-#define PI 3.1415926535f
+#define PI 3.1415f
 //Private
 float Angle::degToRad(float deg)
 {
